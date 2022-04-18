@@ -1,6 +1,6 @@
 const crypto = require("crypto");
-const fetch = require("node-fetch");
-const axios = require("axios");
+// const fetch = require("node-fetch");
+// const axios = require("axios");
 // const { OAuth2Client } = require("google-auth-library");
 const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
@@ -10,7 +10,7 @@ const User = require("../models/User");
 // @route     POST /api/v1/auth/register
 // @access    Public
 exports.register = asyncHandler(async (req, res, next) => {
-  const { name, email, password, role } = req.body;
+  const { name, email, password, role, age, weekOfPregnancy, healthIssues, complications } = req.body;
 
   // Create user
   const user = await User.create({
@@ -18,6 +18,10 @@ exports.register = asyncHandler(async (req, res, next) => {
     email,
     password,
     role,
+    age, 
+    weekOfPregnancy, 
+    healthIssues, 
+    complications
   });
 
   sendTokenResponse(user, 200, res);

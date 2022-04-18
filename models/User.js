@@ -17,6 +17,22 @@ const UserSchema = new mongoose.Schema({
       "Please add a valid email",
     ],
   },
+  age: {
+    type: Number,
+    required: true
+  },
+  weekOfPregnancy: {
+    type: Number,
+    required: true
+  },
+  healthIssues: [
+    {
+      type: String
+    }
+  ],
+  complications:{
+    type: String
+  },
   role: {
     type: String,
     enum: ["mother", "helper", "admin"],
