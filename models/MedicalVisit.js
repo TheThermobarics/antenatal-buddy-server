@@ -2,82 +2,78 @@ const mongoose = require("mongoose");
 
 const MedicalVisitSchema = new mongoose.Schema({
   firstVisitDetails: {
-      dateOfVisit: {
-          type: Date,
-          required: true,
-      },
-      pallor:{
-          type:String
-      },
-      pulse:{
-          type:String
-      },
-      rr:{
-          type:String
-      },
-      bp:{
-          type:String
-      },
-      weight:{
-          type:Number
-      },
-      labInvestigationsImg:{
-          type:String
-      }
+    dateOfVisit: {
+      type: Date,
+    },
+    pallor: {
+      type: String,
+    },
+    pulse: {
+      type: String,
+    },
+    rr: {
+      type: String,
+    },
+    bp: {
+      type: String,
+    },
+    weight: {
+      type: Number,
+    },
+    labInvestigationsImg: {
+      type: String,
+    },
   },
-  secondVisitDetails:{
-      dateOfVisit: {
-          type: Date,
-          required: true,
-      },
-      weight:{
-          type:Number
-      },
-      sfhMeasurement:{
-          type:String
-      },
-      labInvestigationsImg:{
-          type:String
-      }
+  secondVisitDetails: {
+    dateOfVisit: {
+      type: Date,
+    },
+    weight: {
+      type: Number,
+    },
+    sfhMeasurement: {
+      type: String,
+    },
+    labInvestigationsImg: {
+      type: String,
+    },
   },
   thirdVisitDetails: {
-      dateOfVisit: {
-          type: Date,
-          required: true,
-      },
-      weight:{
-          type:Number
-      },
-      preeclampsia:{
-          type:String
-      },
-      anemia:{
-          type:String
-      },
-      IUGR:{
-          type:String
-      },
-      labInvestigationsImg:{
-          type:String
-      }
+    dateOfVisit: {
+      type: Date,
+    },
+    weight: {
+      type: Number,
+    },
+    preeclampsia: {
+      type: String,
+    },
+    anemia: {
+      type: String,
+    },
+    IUGR: {
+      type: String,
+    },
+    labInvestigationsImg: {
+      type: String,
+    },
   },
   fourthVisitDetails: {
-      dateOfVisit: {
-          type: Date,
-          required: true,
-      },
-      weight:{
-          type:Number
-      },
-      foetalLie:{
-          type:String
-      },
-      foetalPosition:{
-          type:String
-      },
-      birthPlanImage:{
-          type:String
-      }
+    dateOfVisit: {
+      type: Date,
+    },
+    weight: {
+      type: Number,
+    },
+    foetalLie: {
+      type: String,
+    },
+    foetalPosition: {
+      type: String,
+    },
+    birthPlanImage: {
+      type: String,
+    },
   },
   helper: {
     type: mongoose.Schema.Types.ObjectId,
@@ -90,9 +86,9 @@ const MedicalVisitSchema = new mongoose.Schema({
     required: true,
   },
   visitNumber: {
-      type: Number,
-      default:1
-  }
+    type: Number,
+    default: 1,
+  },
 });
 
 module.exports = mongoose.model("MedicalVisit", MedicalVisitSchema);
