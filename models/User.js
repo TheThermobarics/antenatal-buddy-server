@@ -19,19 +19,19 @@ const UserSchema = new mongoose.Schema({
   },
   age: {
     type: Number,
-    required: true
+    required: true,
   },
   weekOfPregnancy: {
     type: Number,
-    required: true
+    required: true,
   },
   healthIssues: [
     {
-      type: String
-    }
+      type: String,
+    },
   ],
-  complications:{
-    type: String
+  complications: {
+    type: String,
   },
   role: {
     type: String,
@@ -43,6 +43,18 @@ const UserSchema = new mongoose.Schema({
     required: [true, "Please add a password"],
     minlength: 6,
     select: false,
+  },
+  specialization: {
+    type: String,
+    default: "no specialization",
+  },
+  hospital: {
+    type: String,
+    default: "no hospital",
+  },
+  aboutMe: {
+    type: String,
+    default: "",
   },
 
   resetPasswordToken: String,

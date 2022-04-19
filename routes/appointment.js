@@ -5,7 +5,7 @@ const {
   cancelAppointment,
   updateAppointment,
   getAppointmentsByHelper,
-  getAppointmentsByMother
+  getAppointmentsByMother,
 } = require("../controllers/appointment");
 const { protect } = require("../middleware/auth");
 const advancedResults = require("../middleware/advancedResults");
@@ -23,12 +23,8 @@ router
   .put(protect, updateAppointment)
   .delete(protect, cancelAppointment);
 
-router
-  .route("/getAppointmentsByHelper")
-  .post(protect,getAppointmentsByHelper)
+router.route("/getAppointmentsByHelper").post(protect, getAppointmentsByHelper);
 
-router
-  .route("/getAppointmentsByMother")
-  .post(protect,getAppointmentsByMother)
+router.route("/getAppointmentsByMother").post(protect, getAppointmentsByMother);
 
 module.exports = router;
