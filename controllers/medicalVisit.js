@@ -2,6 +2,7 @@ const asyncHandler = require("../middleware/async");
 const ErrorResponse = require("../utils/errorResponse");
 const MedicalVisit = require("../models/MedicalVisit");
 const dateHelpers = require("../utils/dateHelper");
+const User = require("../models/User");
 
 // @desc      Get all medical visits
 // @route     GET /api/v1/medicalVisits/
@@ -10,19 +11,54 @@ exports.getMedicalVisits = asyncHandler(async (req, res, next) => {
   res.status(200).json(res.advancedResults);
 });
 
+// @desc      Get doctor wise medical visit for patient
+// @route     POST /api/v1/medicalVisits/doctorWiseVisit
+// @access    Protected
+exports.getdoctorWiseVisit = asyncHandler(async (req, res, next) => {
+  const { motherId } = req.body;
+
+  if (!motherId) {
+    return next(new ErrorResponse("Please provide a patient id", 400));
+  }
+
+  const doctors = await User.find({ role: "helper" });
+  const visits = await MedicalVisit.find();
+
+  let returnObj = [];
+
+  doctors.forEach((doc) => {
+    let innerObj = { helper: doc, visit: { visitNumber: 0 } };
+    visits.forEach((visit) => {
+      if (
+        visit.mother.toString() === motherId &&
+        visit.helper.toString() === doc._id.toString()
+      ) {
+        innerObj["visit"] = visit;
+      }
+    });
+    returnObj.push(innerObj);
+  });
+
+  res.status(200).json({
+    count: returnObj.length,
+    success: true,
+    data: returnObj,
+  });
+});
+
 // @desc      Create a medical visit
 // @route     POST /api/v1/medicalVisits/
 // @access    Protected
 exports.createMedicalVisit = asyncHandler(async (req, res, next) => {
   const { mother, helper, dateOfVisit } = req.body;
-  if (req.body.helper !== req.user.id && req.body.mother !== req.user.id) {
-    return next(
-      new ErrorResponse(
-        "The logged in user and the person creating the appointment are different",
-        401
-      )
-    );
-  }
+  // if (req.body.helper !== req.user.id && req.body.mother !== req.user.id) {
+  //   return next(
+  //     new ErrorResponse(
+  //       "The logged in user and the person creating the appointment are different",
+  //       401
+  //     )
+  //   );
+  // }
 
   const parsedDate = dateHelpers.createDateFromString(dateOfVisit);
 
