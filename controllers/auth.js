@@ -46,6 +46,8 @@ exports.register = asyncHandler(async (req, res, next) => {
 // @route     POST /api/v1/auth/login
 // @access    Public
 exports.login = asyncHandler(async (req, res, next) => {
+  // Increase the weekOfPregnancy fields by 1 here based on today's date and the document's created at fields
+
   const { email, password } = req.body;
 
   // Validate emil & password
